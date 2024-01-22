@@ -1,7 +1,6 @@
 from django.urls import path
-
-from . import views
+from .views import WorkList
 
 urlpatterns = [
-    path("", views.index, name="index"),
+    path('', WorkList.as_view(), name='work-list'),
 ]

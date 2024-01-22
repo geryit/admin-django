@@ -1,5 +1,11 @@
-from django.http import HttpResponse, JsonResponse
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from work.models import Work
+from work.serializers import WorkSerializer  # You need to create this serializer
 
 
-def index(request):
-    return JsonResponse({"message": "Hello, world!"})
+class WorkList(APIView):
+    def get(self, request, format=None):
+        all_works = Work.objects.all()
+        serializer = WorkSerializer(all_works, many=True)
+        return Response(serializer.data)
